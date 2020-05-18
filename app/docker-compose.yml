@@ -1,0 +1,33 @@
+version: '3.0'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+    - 5672:5672 # port for the daemon API
+    - 15672:15672 # port for the RabbitMQ management interface
+  rabbitmq-exporter:
+    image: kbudde/rabbitmq-exporter
+    restart: always
+    depends_on:
+      - "rabbitmq"
+    ports:
+    - 9422:9090 #port of the node_exporter
+    environment:
+      RABBIT_URL: "http://rabbitmq:15672"
+      RABBIT_USER: "guest"
+      RABBIT_PASSWORD: "guest"
+      PUBLISH_PORT: "9422"
+  consumer-with-duration:
+    build: consumer-with-duration
+    links:
+    - rabbitmq
+    command: python consumer.py -p 5672 -s rabbitmq
+  producer-with-duration:
+    build: producer-with-duration
+    links:
+    - rabbitmq
+    # run the producer sending random messages every -t seconds
+    # the file .env has the value of the duration_in_seconds
+    # thats why you should run the docker-compose up from the same path that exists
+    command: python producer.py -p 5672 -s rabbitmq -t ${duration_in_seconds}
