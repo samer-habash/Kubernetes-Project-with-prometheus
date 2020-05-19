@@ -3,4 +3,5 @@ ENV PYTHONPATH /usr/src/app
 WORKDIR /usr/src/app
 COPY ./ ./
 RUN pip install -r requirements.txt
-#CMD ["python", "consumer.py", "-p", "5672", "-s", "rabbitmq"]
+#Expose the metrics in consumer from port 9422
+#CMD ["python", "consumer.py", "-p", "9422", "-s", "rabbitmq"]

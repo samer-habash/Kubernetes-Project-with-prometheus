@@ -15,6 +15,7 @@ Fixing the issue:
  2) Make the user run as root and change the directory permissions (added the below code in the deployment-prometheus-server) :
   Have a look at the file "fixed-deployment-prometheus-server.yaml"
   NOTE: The initContainers busybox is applied after creating the /data directory with the prometheus image
+        Also you can do the same for alertmanager deployment .
 
     """
     initContainers:
@@ -41,7 +42,7 @@ NOTES:
 After the fix you can restart PC, deployment, minikube and the prometheus-server will be reloading and working.
 
 Usage of miniukube :
-  - I am using minikube --vm-driver none,  since it doesn't need any port-forward and the Local Machine will be inside the cluster and also the local machine will have the /tmp/hostpath-provisioner/ directly in your /tmp/ dir.
+  - I am using minikube --vm-driver none,  since it doesn't need any port-forward and the Local Machine will be inside the cluster and also the local machine will have the /tmp/hostpath-provisioner/ directly in your /tmp/ dir. Also it doesn't need to re-run the minikube with more --cpus or --memory . (it will use your local machine resources) 
 
 
 

@@ -4,5 +4,5 @@ WORKDIR /usr/src/app
 COPY ./ ./
 RUN pip install -r requirements.txt
 #ENTRYPOINT ["python", "producer.py", "-p", "5672", "-s", "rabbitmq"]
-# default is 30 message , you can increase/decrease it by passing -r <count>
-#CMD ["-r", "30"]
+# default is 20 seconds loop messages , you can increase/decrease it by passing -t <duration_in_seconds>
+#CMD ["-t", "20"]

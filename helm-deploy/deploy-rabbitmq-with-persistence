@@ -1,0 +1,1 @@
+helm install rabbitmq stable/rabbitmq --set persistence.enable=true

@@ -15,16 +15,11 @@ spec:
         app: rabbitmq
     spec:
       containers:
-      - image: rabbitmq:3-management
-        name: rabbitmq
+      - name: rabbitmq
+        image: rabbitmq:3-management
         ports:
         - name: api-port
           containerPort: 5672
         - name: gui-port
           containerPort: 15672
-      - image: kbudde/rabbitmq-exporter
-        name: rabbitmq-exporter
-        ports:
-        - name: exporter-port
-          containerPort: 9422
       restartPolicy: Always

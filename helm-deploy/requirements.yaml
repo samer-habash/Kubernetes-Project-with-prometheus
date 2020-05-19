@@ -1,0 +1,6 @@
+dependencies:
+    # Latest version of stable/prometheus-rabbitmq-exporter
+  - name: prometheus-rabbitmq-exporter
+    version: 0.5.5
+    repository: https://kubernetes-charts.storage.googleapis.com
+    # Run helm dependecy update 
